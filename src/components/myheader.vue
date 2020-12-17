@@ -1,9 +1,40 @@
 <template>
     <div class="header-container">
+            <router-link to="/" exact active-class="header--link--active" class="header-link header-home">Home</router-link>
         <nav>
-            <router-link to="/" exact active-class="header--link--active" class="">Home</router-link>
-            <router-link to="/HowToUse" exact active-class="header--link--active" class="">使い方</router-link>
-            <router-link to="/Schedule" exact active-class="header--link--active" class="">予定を組む</router-link>
+            <router-link to="/HowToUse" exact active-class="header--link--active" class="header-link">使い方</router-link>
+            <router-link to="/Schedule" exact active-class="header--link--active" class="header-link">予定を組む</router-link>
         </nav>
     </div>
 </template>
+
+<style scoped>
+    .header-container {
+        background-color: rgba(70, 200, 200, 0.9);
+        padding: 10px 0;
+        display: flex;
+        position: fixed;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .header-link {
+        padding: 0 20px;
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+    }
+
+    .header--link--active{
+        border-bottom: 1px solid rgb(255, 100, 247);
+    }
+
+    .header-home {
+        font-size: 200%;
+        margin-left: 20px;
+    }
+
+    nav {
+        font-size: 150%;
+        padding-top:10px;
+    }
+</style>

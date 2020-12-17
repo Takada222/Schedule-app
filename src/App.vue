@@ -1,7 +1,7 @@
 <template>
   <div>
     <myheader></myheader>
-    <router-view></router-view>
+    <router-view class="top-container"></router-view>
     <myfooter></myfooter>
   </div>
 </template>
@@ -20,4 +20,23 @@ export default {
 </script>
 
 <style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .top-container {
+    padding-top: 100px;
+    width: 90%;
+    margin: 0 5%;
+  }
+
+  h1 {
+    color: green;
+    margin-bottom: 20px;
+  }
+
+  myheader {
+    position: fixed;
+  }
 </style>
