@@ -1,7 +1,7 @@
 <template>
   <div>
     <myheader></myheader>
-    <router-view class="top-container"></router-view>
+    <router-view></router-view>
     <myfooter></myfooter>
   </div>
 </template>
@@ -29,14 +29,11 @@ export default {
     padding-top: 100px;
     width: 90%;
     margin: 0 5%;
+    z-index: 1;
   }
 
   h1 {
-    color: green;
+    color: rgba(200, 70, 70, 0.9);
     margin-bottom: 20px;
-  }
-
-  myheader {
-    position: fixed;
   }
 </style>

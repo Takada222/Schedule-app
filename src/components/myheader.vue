@@ -2,8 +2,8 @@
     <div class="header-container">
             <router-link to="/" exact active-class="header--link--active" class="header-link header-home">Home</router-link>
         <nav>
-            <router-link to="/HowToUse" exact active-class="header--link--active" class="header-link">使い方</router-link>
-            <router-link to="/Schedule" exact active-class="header--link--active" class="header-link">予定を組む</router-link>
+            <router-link to="/HowToUse" exact active-class="header--link--active" class="header-link">HowToUse</router-link>
+            <router-link to="/Schedule" exact active-class="header--link--active" class="header-link">Schedule</router-link>
         </nav>
     </div>
 </template>
@@ -16,9 +16,11 @@
         position: fixed;
         justify-content: space-between;
         width: 100%;
+        height: 50px;
     }
     
     .header-link {
+        width: 100px;
         padding: 0 20px;
         color: rgb(255, 255, 255);
         text-decoration: none;

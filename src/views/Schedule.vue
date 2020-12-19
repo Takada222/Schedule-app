@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="top-container">
         <h1>今日の予定</h1>
         <create-task></create-task>
         <task-list></task-list>
@@ -17,3 +17,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    myheader {
+    position: fixed;
+    z-index: 2;
+  }
+</style>
