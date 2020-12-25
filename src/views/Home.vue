@@ -73,13 +73,13 @@ export default {
 
     .mouseHoverLeft p {
         color: white;
-        background-color: rgba(70, 200, 200, 0.5);
+        background-color: rgba(52, 129, 196, 0.3);
         transition: 1s;
     }
 
     .mouseHoverRight p {
         color: white;
-        background-color: rgba(70, 200, 200, 0.5);
+        background-color: rgba(52, 129, 196, 0.3);
         transition: 1s;
     }
 
