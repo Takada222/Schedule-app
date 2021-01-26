@@ -1,16 +1,16 @@
 <template>
-    <div class="top-container">
-        <h1>今日の予定</h1>
-        <schedule-page></schedule-page>
-    </div>
+  <div class="top-container">
+    <h1>今日の予定</h1>
+    <task-list />
+  </div>
 </template>
 
 <script>
-import SchedulePage from '../components/SchedulePage';
+import TaskList from '../components/TaskList';
 
 export default {
     components: {
-        SchedulePage
+        TaskList
     }
 }
 </script>

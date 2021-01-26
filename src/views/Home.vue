@@ -1,14 +1,30 @@
 <template>
-    <div class="body-container">
-        <div class="link link-to-how" @mouseover="changeLeftColor" @mouseleave="ripositLeftColor" :class={mouseHoverLeft:isActiveLeft}>
-            <p>? How To Use ?</p>
-            <a href="#" @click="toHowToUse"></a>
-        </div>
-        <div class="link link-to-schedule" @mouseover="changeRightColor" @mouseleave="ripositRightColor" :class={mouseHoverRight:isActiveRight}>
-            <p>! Try Using !</p>
-            <a href="#" @click="toSchedule"></a>
-        </div>
+  <div class="body-container">
+    <div
+      class="link link-to-how"
+      :class="{mouseHoverLeft:isActiveLeft}"
+      @mouseover="changeLeftColor"
+      @mouseleave="ripositLeftColor"
+    >
+      <p>? How To Use ?</p>
+      <a
+        href="#"
+        @click="toHowToUse"
+      />
     </div>
+    <div
+      class="link link-to-schedule"
+      :class="{mouseHoverRight:isActiveRight}"
+      @mouseover="changeRightColor"
+      @mouseleave="ripositRightColor"
+    >
+      <p>! Try Using !</p>
+      <a
+        href="#"
+        @click="toSchedule"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -66,20 +82,21 @@ export default {
     }
 
     .link p {
-        font-size: 60px;
-        color: rgba(70, 200, 200, 0.9);
+        padding: 0 20px;
+        font-size: 80px;
+        color: rgb(230, 150, 0);
         transition: 1s;
     }
 
     .mouseHoverLeft p {
         color: white;
-        background-color: rgba(52, 129, 196, 0.3);
+        background-color: rgba(196, 150, 52, 0.605);
         transition: 1s;
     }
 
     .mouseHoverRight p {
         color: white;
-        background-color: rgba(52, 129, 196, 0.3);
+        background-color: rgba(196, 150, 52, 0.755);
         transition: 1s;
     }
 

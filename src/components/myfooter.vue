@@ -1,11 +1,32 @@
 <template>
-    <div id="footer-container">
-        <nav>
-            <router-link to="/" exact active-class="footer--link--active" class="footer-link">Home</router-link>
-            <router-link to="/HowToUse" exact active-class="footer--link--active" class="footer-link">HowToUse</router-link>
-            <router-link to="/Schedule" exact active-class="footer--link--active" class="footer-link footer-schedule">Schedule</router-link>
-        </nav>
-    </div>
+  <div id="footer-container">
+    <nav>
+      <router-link
+        to="/"
+        exact
+        active-class="footer--link--active"
+        class="footer-link"
+      >
+        Home
+      </router-link>
+      <router-link
+        to="/HowToUse"
+        exact
+        active-class="footer--link--active"
+        class="footer-link"
+      >
+        HowToUse
+      </router-link>
+      <router-link
+        to="/Schedule"
+        exact
+        active-class="footer--link--active"
+        class="footer-link footer-schedule"
+      >
+        Schedule
+      </router-link>
+    </nav>
+  </div>
 </template>
 
 <style scoped>

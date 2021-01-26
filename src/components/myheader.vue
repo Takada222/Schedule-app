@@ -1,11 +1,32 @@
 <template>
-    <div class="header-container">
-            <router-link to="/" exact active-class="header--link--active" class="header-link header-home">Home</router-link>
-        <nav>
-            <router-link to="/HowToUse" exact active-class="header--link--active" class="header-link">HowToUse</router-link>
-            <router-link to="/Schedule" exact active-class="header--link--active" class="header-link">Schedule</router-link>
-        </nav>
-    </div>
+  <div class="header-container">
+    <router-link
+      to="/"
+      exact
+      active-class="header--link--active"
+      class="header-link header-home"
+    >
+      Home
+    </router-link>
+    <nav>
+      <router-link
+        to="/HowToUse"
+        exact
+        active-class="header--link--active"
+        class="header-link"
+      >
+        HowToUse
+      </router-link>
+      <router-link
+        to="/Schedule"
+        exact
+        active-class="header--link--active"
+        class="header-link"
+      >
+        Schedule
+      </router-link>
+    </nav>
+  </div>
 </template>
 
 <style scoped>
@@ -26,8 +47,12 @@
         text-decoration: none;
     }
 
+    .header-link:hover {
+        color: rgb(220, 220, 220);
+    }
+
     .header--link--active{
-        border-bottom: 1px solid rgb(255, 100, 247);
+        border-bottom: 1px solid rgb(230, 170, 0);
     }
 
     .header-home {

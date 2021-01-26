@@ -1,8 +1,8 @@
 <template>
   <div>
-    <myheader></myheader>
-    <router-view></router-view>
-    <myfooter></myfooter>
+    <myheader />
+    <router-view />
+    <myfooter />
   </div>
 </template>
 
