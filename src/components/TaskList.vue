@@ -4,8 +4,8 @@
     <task-info
       v-show="showTaskInfoModal"
       :selected-task-info="selectedTaskInfo"
-      @closeTaskInfoModal="closeTaskInfoModal"
-      @removeSelectedTask="closeTaskInfoModal; removeSelectedTask"
+      @closeTaskInfoModal="closeTaskInfoModal()"
+      @removeSelectedTask="closeTaskInfoModal(); removeSelectedTask(task)"
     />
     <draggable
       group="taskGroup"
@@ -88,8 +88,8 @@ export default {
         };
       }
     },
-    removeSelectedTask(value) {
-      this.tasks.splice(value, 1)
+    removeSelectedTask(selectedTask) {
+      this.tasks.splice(selectedTask, 1)
     },
     openTaskInfoModal(value) {
       this.selectedTaskInfo = value

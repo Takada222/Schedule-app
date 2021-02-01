@@ -104,7 +104,7 @@ export default {
       }
     },
     removeSelectedTask() {
-      this.$emit("removeSelectedTask", this.selectedTaskInfo.index)
+      this.$emit("removeSelectedTask");
       this.showNoNameErrorMessage = false
       this.showTooLongNameErrorMessage = false
     }
@@ -166,6 +166,9 @@ export default {
 
 .task-input {
   width: 100%;
+  &:hover {
+    background-color: rgb(240, 240, 240);
+  }
 }
 
 .task-time .task-input {
