@@ -1,6 +1,12 @@
 <template>
   <div class="task-area">
     <create-task @new-task="reflectTask" />
+    <task-info
+      v-show="showTaskInfoModal"
+      :selected-task-info="selectedTaskInfo"
+      @closeTaskInfoModal="closeTaskInfoModal"
+      @removeSelectedTask="closeTaskInfoModal; removeSelectedTask"
+    />
     <draggable
       group="taskGroup"
       tag="ul"
@@ -11,24 +17,27 @@
         :key="task.id"
         class="task-width"
         :style="widthClass(task.time)"
+        :class="{'complete-opacity': task.complete}"
       >
         <div class="icon-btns">
-          <a
+          <button
             class="btn icon-btn left-icon-btn"
+            @click="task.complete = !task.complete"
           >
             <font-awesome-icon
               class="icon"
               :icon="['far', 'check-circle']"
             />
-          </a>
-          <a
+          </button>
+          <button
             class="btn icon-btn"
+            @click="openTaskInfoModal(task)"
           >
             <font-awesome-icon
               class="icon"
               :icon="['far', 'arrow-alt-circle-right']"
             />
-          </a>
+          </button>
         </div>
         <p class="task-name">
           {{ task.name }}
@@ -40,16 +49,20 @@
 
 <script>
 import CreateTask from "./organisms/CreateTask";
+import TaskInfo from "./organisms/TaskInfo";
 import draggable from "vuedraggable";
 
 export default {
   components: {
     draggable,
     CreateTask,
+    TaskInfo
   },
   data() {
     return {
       tasks: [],
+      selectedTaskInfo: {},
+      showTaskInfoModal: false
     };
   },
   methods: {
@@ -75,6 +88,16 @@ export default {
         };
       }
     },
+    removeSelectedTask(value) {
+      this.tasks.splice(value, 1)
+    },
+    openTaskInfoModal(value) {
+      this.selectedTaskInfo = value
+      this.showTaskInfoModal = true
+    },
+    closeTaskInfoModal() {
+      this.showTaskInfoModal = false
+    }
   },
 };
 </script>
@@ -105,7 +128,7 @@ li {
   }
   .icon-btns {
     width: 100%;
-    height: 20px;
+    height: 30px;
     border-bottom: 2px solid #000;
     writing-mode: horizontal-tb;
     display: flex;
@@ -137,6 +160,9 @@ li {
 }
 .task-width {
   width: var(--task-length);
+}
+.complete-opacity {
+  opacity: 0.4;
 }
 .box {
   height: 300px;

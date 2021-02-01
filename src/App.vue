@@ -25,6 +25,15 @@ export default {
     padding: 0;
   }
 
+  button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    appearance: none;
+  }
+
   .top-container {
     padding-top: 100px;
     width: 90%;
