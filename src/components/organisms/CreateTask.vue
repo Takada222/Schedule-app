@@ -2,20 +2,20 @@
   <div>
     <button
       class="create-task-btn"
-      @click="openCreateTaskModal"
+      @click="openCreateTaskModal()"
     >
       タスクを作成
     </button>
     <div
       v-show="showModal"
       class="overlay"
-      @click.self="closeCreateTaskModal"
+      @click.self="closeCreateTaskModal()"
     >
       <div id="create-task-modal">
         <div class="input-forms-buttons">
           <button
             class="close-btn"
-            @click="closeCreateTaskModal"
+            @click="removeInput(); closeCreateTaskModal()"
           >
             <font-awesome-icon
               class="close-create-task-modal-button"

@@ -4,8 +4,9 @@
     <task-info
       v-show="showTaskInfoModal"
       :selected-task-info="selectedTaskInfo"
+      :sync="tasks"
       @closeTaskInfoModal="closeTaskInfoModal()"
-      @removeSelectedTask="closeTaskInfoModal(); removeSelectedTask(task)"
+      @removeSelectedTask="closeTaskInfoModal(); removeSelectedTask(index)"
     />
     <draggable
       group="taskGroup"

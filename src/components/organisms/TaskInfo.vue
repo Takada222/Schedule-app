@@ -1,12 +1,12 @@
 <template>
   <div
     class="overlay"
-    @click.self="closeTaskInfoModal"
+    @click.self="editSelectedTaskInfo()"
   >
     <div id="task-info-modal">
       <button
         class="close-btn"
-        @click="closeTaskInfoModal()"
+        @click="editSelectedTaskInfo()"
       >
         <font-awesome-icon
           class="close-task-info-modal-button"
@@ -19,7 +19,7 @@
             タスク名
           </p>
           <input
-            v-model="selectedTaskInfo.name"
+            v-model="selectedTaskInfoComputed.name"
             class="task-input"
             type="text"
             placeholder="タスク名を入力"
@@ -42,7 +42,7 @@
             時間 (分)
           </p>
           <input
-            v-model.number="selectedTaskInfo.time"
+            v-model.number="selectedTaskInfoComputed.time"
             class="task-input"
             type="number"
             step="1"
@@ -53,7 +53,7 @@
             詳細
           </p>
           <textarea
-            v-model="selectedTaskInfo.details"
+            v-model="selectedTaskInfoComputed.details"
             class="task-input"
             name="details"
             cols="30"
@@ -62,10 +62,16 @@
           />
         </div>
         <div class="btn-group">
-          <button @click="editSelectedTaskInfo()">
+          <button
+            class="edit-btn"
+            @click="editSelectedTaskInfo()"
+          >
             変更
           </button>
-          <button @click="removeSelectedTask()">
+          <button
+            class="delete-btn"
+            @click="removeSelectedTask()"
+          >
             削除
           </button>
         </div>
@@ -80,16 +86,20 @@ export default {
   data() {
     return {
       showNoNameErrorMessage: false,
-      showTooLongNameErrorMessage: false,
-      tasks: [],
+      showTooLongNameErrorMessage: false
     };
   },
+  computed: {
+    selectedTaskInfoComputed: {
+      get() {
+        return this.selectedTaskInfo
+      },
+      set(newValue) {
+          this.$emit("update:editedTaskInfo", newValue)
+      }
+    }
+  },
   methods: {
-    closeTaskInfoModal() {
-      this.$emit("closeTaskInfoModal");
-      this.showNoNameErrorMessage = false
-      this.showTooLongNameErrorMessage = false
-    },
     editSelectedTaskInfo() {
       if (this.selectedTaskInfo.name.length == 0){
         this.showNoNameErrorMessage = true
@@ -104,9 +114,11 @@ export default {
       }
     },
     removeSelectedTask() {
-      this.$emit("removeSelectedTask");
-      this.showNoNameErrorMessage = false
-      this.showTooLongNameErrorMessage = false
+      if(confirm('削除しますか？')){
+        this.$emit("removeSelectedTask");
+        this.showNoNameErrorMessage = false
+        this.showTooLongNameErrorMessage = false
+      }
     }
   },
 };
@@ -187,16 +199,31 @@ export default {
   & button {
     margin: 0 10px;
     padding: 5px 30px;
-    border: 2px solid #000;
     border-radius: 3px;
     font-size: 15px;
     transition: .3s;
     &:hover {
       cursor: pointer;
       color: white;
-      background-color: rgb(60, 60, 60);
       transition: .3;
     }
+  }
+}
+
+.edit-btn {
+  color: black;
+  border: 2px solid black;
+  &:hover {
+    background-color: rgb(60, 60, 60);
+  }
+}
+
+.delete-btn {
+  color: red;
+  border: 2px solid red;
+  &:hover {
+    color: white;
+    background-color: red;
   }
 }
 </style>
