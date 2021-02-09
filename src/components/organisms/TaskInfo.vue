@@ -1,12 +1,12 @@
 <template>
   <div
     class="overlay"
-    @click.self="editSelectedTaskInfo()"
+    @click.self="closeTaskInfoModalWithNoEdit()"
   >
     <div id="task-info-modal">
       <button
         class="close-btn"
-        @click="editSelectedTaskInfo()"
+        @click="closeTaskInfoModalWithNoEdit()"
       >
         <font-awesome-icon
           class="close-task-info-modal-button"
@@ -86,7 +86,8 @@ export default {
   data() {
     return {
       showNoNameErrorMessage: false,
-      showTooLongNameErrorMessage: false
+      showTooLongNameErrorMessage: false,
+      selectedTaskInfoWithNoEdit: this.selectedTaskInfo
     };
   },
   computed: {
@@ -95,16 +96,16 @@ export default {
         return this.selectedTaskInfo
       },
       set(newValue) {
-          this.$emit("update:editedTaskInfo", newValue)
+        this.$emit("update:editedTaskInfo", newValue)
       }
     }
   },
   methods: {
     editSelectedTaskInfo() {
-      if (this.selectedTaskInfo.name.length == 0){
+      if (this.selectedTaskInfoComputed.name.length == 0){
         this.showNoNameErrorMessage = true
         this.showTooLongNameErrorMessage = false
-      }else if (this.selectedTaskInfo.name.length > 24) {
+      }else if (this.selectedTaskInfoComputed.name.length > 24) {
         this.showTooLongNameErrorMessage = true
         this.showNoNameErrorMessage = false
       }else{
@@ -119,6 +120,9 @@ export default {
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
       }
+    },
+    closeTaskInfoModalWithNoEdit() {
+      this.$emit("closeTaskInfoModalWithNoEdit", this.selectedTaskInfoWithNoEdit)
     }
   },
 };

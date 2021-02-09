@@ -9,7 +9,7 @@
     <div
       v-show="showModal"
       class="overlay"
-      @click.self="closeCreateTaskModal()"
+      @click.self="removeInput(); closeCreateTaskModal()"
     >
       <div id="create-task-modal">
         <div class="input-forms-buttons">
@@ -79,11 +79,7 @@
             />
           </div>
           <div class="btn-group">
-            <button
-              @click="
-                createNewTaskOrShowErrorMessage();
-              "
-            >
+            <button @click="createNewTaskOrShowErrorMessage()">
               作成
             </button>
             <button @click="removeInput(); closeCreateTaskModal()">
@@ -134,10 +130,10 @@ export default {
           details: this.taskDetails,
           complete: false
         });
-        (this.taskName = ""),
-        (this.taskTime = 0),
-        (this.taskDetails = ""),
         this.$emit("new-task", this.tasks)
+        this.taskName = ""
+        this.taskTime = 0
+        this.taskDetails = ""
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
         this.showModal = false
