@@ -82,7 +82,12 @@
 
 <script>
 export default {
-  props: ["selectedTaskInfo"],
+  props: {
+    selectedTaskInfo: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       showNoNameErrorMessage: false,

@@ -3,10 +3,10 @@
     <create-task @new-task="reflectTask" />
     <task-info
       v-show="showTaskInfoModal"
-      :selected-task-nfo="selectedTaskInfo"
+      :selected-task-info="selectedTaskInfo"
       :sync="tasks"
-      @removeSelectedTask="closeTaskInfoModal(); removeSelectedTask(index)"
-      @closeTaskInfoModalWithNoEdit="closeTaskInfoModalWithNoEdit(task)"
+      @removeSelectedTask="removeSelectedTask(index)"
+      @closeTaskInfoModalWithNoEdit="closeTaskInfoModalWithNoEdit"
     />
     <draggable
       group="taskGroup"
@@ -91,6 +91,7 @@ export default {
     },
     removeSelectedTask(selectedTask) {
       this.tasks.splice(selectedTask, 1)
+      this.showTaskInfoModal = false
     },
     openTaskInfoModal(value) {
       this.selectedTaskInfo = value

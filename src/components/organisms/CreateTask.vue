@@ -129,7 +129,7 @@ export default {
           time: this.taskTime,
           details: this.taskDetails,
           complete: false
-        });
+        })
         this.$emit("new-task", this.tasks)
         this.taskName = ""
         this.taskTime = 0
