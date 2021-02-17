@@ -19,10 +19,10 @@
             タスク名
           </p>
           <input
+            v-model="selectedTaskInfo.name"
             class="task-input"
             type="text"
             placeholder="タスク名を入力"
-            :value="selectedTaskInfo.name"
             @input="$emit('update:selectedTaskInfo.name', $event.target.value)"
           >
           <p
@@ -43,10 +43,10 @@
             時間 (分)
           </p>
           <input
+            v-model="selectedTaskInfo.time"
             class="task-input"
             type="number"
             step="1"
-            :value="selectedTaskInfo.time"
             @input="$emit('update:selectedTaskInfo.time', $event.target.value)"
           >
         </div>
@@ -55,12 +55,12 @@
             詳細
           </p>
           <textarea
+            v-model="selectedTaskInfo.details"
             class="task-input"
             name="details"
             cols="30"
             rows="10"
             placeholder="詳細を入力"
-            :value="selectedTaskInfo.details"
             @input="$emit('update:selectedTaskInfo.details', $event.target.value)"
           />
         </div>
@@ -93,23 +93,22 @@ export default {
   },
   data() {
     return {
-      editedTaskInfo: {},
       showNoNameErrorMessage: false,
       showTooLongNameErrorMessage: false
     };
   },
   methods: {
     editSelectedTaskInfo() {
-      if (this.editedTaskInfo.name.length == 0){
+      if (this.selectedTaskInfo.name.length == 0){
         this.showNoNameErrorMessage = true
         this.showTooLongNameErrorMessage = false
-      }else if (this.editedTaskInfo.name.length > 24) {
+      }else if (this.selectedTaskInfo.name.length > 24) {
         this.showTooLongNameErrorMessage = true
         this.showNoNameErrorMessage = false
       }else{
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
-        this.$emit("editSelectedTaskInfo", this.editedTaskInfo);
+        this.$emit("editSelectedTaskInfo", this.selectedTaskInfo);
       }
     },
     removeSelectedTask() {

@@ -4,8 +4,8 @@
     <task-info
       v-show="showTaskInfoModal"
       :selected-task-info.sync="selectedTaskInfo"
-      @editSelectedTaskInfo="editSelectedTaskInfo(index)"
-      @removeSelectedTask="removeSelectedTask(index)"
+      @editSelectedTaskInfo="editSelectedTaskInfo"
+      @removeSelectedTask="removeSelectedTask"
       @closeTaskInfoModalWithNoEdit="closeTaskInfoModalWithNoEdit"
     />
     <draggable
@@ -89,7 +89,7 @@ export default {
         };
       }
     },
-    editSelectedTaskInfo(index, editedTaskInfo) {
+    editSelectedTaskInfo(editedTaskInfo, index) {
       this.tasks.splice(index, 1, editedTaskInfo)
       this.showTaskInfoModal = false
     },

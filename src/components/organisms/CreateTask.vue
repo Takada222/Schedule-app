@@ -159,7 +159,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  align-items: center;
+  display: flex;
   justify-content: center;
 }
 
@@ -184,8 +184,8 @@ export default {
 
 #create-task-modal {
   background-color: #fff;
-  width: 20%;
-  margin: 10% 40%;
+  margin-top: 150px;
+  width: 350px;
   height: 400px;
   position: relative;
 }
