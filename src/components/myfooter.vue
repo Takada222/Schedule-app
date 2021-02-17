@@ -35,6 +35,7 @@
         background-color: rgb(116, 218, 218);
         line-height: 40px;
         text-align: center;
+        margin-bottom: 30px;
     }
     .footer-link {
         display: inline-block;

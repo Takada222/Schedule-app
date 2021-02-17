@@ -19,10 +19,11 @@
             タスク名
           </p>
           <input
-            v-model="selectedTaskInfoComputed.name"
             class="task-input"
             type="text"
             placeholder="タスク名を入力"
+            :value="selectedTaskInfo.name"
+            @input="$emit('update:selectedTaskInfo.name', $event.target.value)"
           >
           <p
             v-show="showNoNameErrorMessage"
@@ -42,10 +43,11 @@
             時間 (分)
           </p>
           <input
-            v-model.number="selectedTaskInfoComputed.time"
             class="task-input"
             type="number"
             step="1"
+            :value="selectedTaskInfo.time"
+            @input="$emit('update:selectedTaskInfo.time', $event.target.value)"
           >
         </div>
         <div class="task task-details">
@@ -53,12 +55,13 @@
             詳細
           </p>
           <textarea
-            v-model="selectedTaskInfoComputed.details"
             class="task-input"
             name="details"
             cols="30"
             rows="10"
             placeholder="詳細を入力"
+            :value="selectedTaskInfo.details"
+            @input="$emit('update:selectedTaskInfo.details', $event.target.value)"
           />
         </div>
         <div class="btn-group">
@@ -84,39 +87,29 @@
 export default {
   props: {
     selectedTaskInfo: {
-      type: Array,
-      required: true
+      type: Object,
+      default() {}
     }
   },
   data() {
     return {
+      editedTaskInfo: {},
       showNoNameErrorMessage: false,
-      showTooLongNameErrorMessage: false,
-      selectedTaskInfoWithNoEdit: this.selectedTaskInfo
+      showTooLongNameErrorMessage: false
     };
-  },
-  computed: {
-    selectedTaskInfoComputed: {
-      get() {
-        return this.selectedTaskInfo
-      },
-      set(newValue) {
-        this.$emit("update:editedTaskInfo", newValue)
-      }
-    }
   },
   methods: {
     editSelectedTaskInfo() {
-      if (this.selectedTaskInfoComputed.name.length == 0){
+      if (this.editedTaskInfo.name.length == 0){
         this.showNoNameErrorMessage = true
         this.showTooLongNameErrorMessage = false
-      }else if (this.selectedTaskInfoComputed.name.length > 24) {
+      }else if (this.editedTaskInfo.name.length > 24) {
         this.showTooLongNameErrorMessage = true
         this.showNoNameErrorMessage = false
       }else{
-        this.$emit("closeTaskInfoModal");
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
+        this.$emit("editSelectedTaskInfo", this.editedTaskInfo);
       }
     },
     removeSelectedTask() {
@@ -127,7 +120,9 @@ export default {
       }
     },
     closeTaskInfoModalWithNoEdit() {
-      this.$emit("closeTaskInfoModalWithNoEdit", this.selectedTaskInfoWithNoEdit)
+      this.$emit("closeTaskInfoModalWithNoEdit")
+      this.showNoNameErrorMessage = false
+      this.showTooLongNameErrorMessage = false
     }
   },
 };
@@ -142,14 +137,14 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  align-items: center;
+  display: flex;
   justify-content: center;
 }
 
 #task-info-modal {
   background-color: #fff;
-  width: 20%;
-  margin: 10% 40%;
+  margin-top: 150px;
+  width: 350px;
   height: 400px;
   position: relative;
 }

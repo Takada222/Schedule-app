@@ -3,8 +3,8 @@
     <create-task @new-task="reflectTask" />
     <task-info
       v-show="showTaskInfoModal"
-      :selected-task-info="selectedTaskInfo"
-      :sync="tasks"
+      :selected-task-info.sync="selectedTaskInfo"
+      @editSelectedTaskInfo="editSelectedTaskInfo(index)"
       @removeSelectedTask="removeSelectedTask(index)"
       @closeTaskInfoModalWithNoEdit="closeTaskInfoModalWithNoEdit"
     />
@@ -89,6 +89,10 @@ export default {
         };
       }
     },
+    editSelectedTaskInfo(index, editedTaskInfo) {
+      this.tasks.splice(index, 1, editedTaskInfo)
+      this.showTaskInfoModal = false
+    },
     removeSelectedTask(selectedTask) {
       this.tasks.splice(selectedTask, 1)
       this.showTaskInfoModal = false
@@ -97,8 +101,7 @@ export default {
       this.selectedTaskInfo = value
       this.showTaskInfoModal = true
     },
-    closeTaskInfoModalWithNoEdit(value) {
-      this.task = value
+    closeTaskInfoModalWithNoEdit() {
       this.showTaskInfoModal = false
     }
   },
