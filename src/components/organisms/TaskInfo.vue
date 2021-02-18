@@ -19,11 +19,11 @@
             タスク名
           </p>
           <input
-            v-model="selectedTaskInfo.name"
+            :value="selectedTaskInfoComputed.name"
             class="task-input"
             type="text"
             placeholder="タスク名を入力"
-            @input="$emit('update:selectedTaskInfo.name', $event.target.value)"
+            @input="editSelectedTaskName"
           >
           <p
             v-show="showNoNameErrorMessage"
@@ -43,11 +43,11 @@
             時間 (分)
           </p>
           <input
-            v-model="selectedTaskInfo.time"
+            :value="selectedTaskInfoComputed.time"
             class="task-input"
             type="number"
             step="1"
-            @input="$emit('update:selectedTaskInfo.time', $event.target.value)"
+            @input="editSelectedTaskTime"
           >
         </div>
         <div class="task task-details">
@@ -55,13 +55,13 @@
             詳細
           </p>
           <textarea
-            v-model="selectedTaskInfo.details"
+            :value="selectedTaskInfoComputed.details"
             class="task-input"
             name="details"
             cols="30"
             rows="10"
             placeholder="詳細を入力"
-            @input="$emit('update:selectedTaskInfo.details', $event.target.value)"
+            @input="editSelectedTaskDetails"
           />
         </div>
         <div class="btn-group">
@@ -93,19 +93,42 @@ export default {
   },
   data() {
     return {
+      editedTaskInfo: {
+        name: this.selectedTaskInfo.name,
+        time: this.selectedTaskInfo.time,
+        details: this.selectedTaskInfo.details
+      },
       showNoNameErrorMessage: false,
-      showTooLongNameErrorMessage: false
+      showTooLongNameErrorMessage: false,
+      length: 0
     };
   },
+  computed: {
+    selectedTaskInfoComputed() {
+      return this.selectedTaskInfo
+    }
+  },
   methods: {
+    editSelectedTaskName(event) {
+      this.editedTaskInfo.name = event.target.value
+    },
+    editSelectedTaskTime(event) {
+      this.editedTaskInfo.time = event.target.value
+    },
+    editSelectedTaskDetails(event) {
+      this.editedTaskInfo.details = event.target.value
+    },
     editSelectedTaskInfo() {
-      if (this.selectedTaskInfo.name.length == 0){
+      if (this.editedTaskInfo.name.length == 0){
         this.showNoNameErrorMessage = true
         this.showTooLongNameErrorMessage = false
-      }else if (this.selectedTaskInfo.name.length > 24) {
+      }else if (this.editedTaskInfo.name.length > 24) {
         this.showTooLongNameErrorMessage = true
         this.showNoNameErrorMessage = false
       }else{
+        this.selectedTaskInfo.name = this.editedTaskInfo.name
+        this.selectedTaskInfo.time = this.editedTaskInfo.time
+        this.selectedTaskInfo.details = this.editedTaskInfo.details
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
         this.$emit("editSelectedTaskInfo", this.selectedTaskInfo);

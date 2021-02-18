@@ -3,7 +3,7 @@
     <create-task @new-task="reflectTask" />
     <task-info
       v-show="showTaskInfoModal"
-      :selected-task-info.sync="selectedTaskInfo"
+      :selected-task-info="selectedTaskInfo"
       @editSelectedTaskInfo="editSelectedTaskInfo"
       @removeSelectedTask="removeSelectedTask"
       @closeTaskInfoModalWithNoEdit="closeTaskInfoModalWithNoEdit"
@@ -41,7 +41,7 @@
           </button>
         </div>
         <p class="task-name">
-          {{ task.name }}
+          {{ task.name }}{{ task.id }}
         </p>
       </li>
     </draggable>
@@ -89,8 +89,8 @@ export default {
         };
       }
     },
-    editSelectedTaskInfo(editedTaskInfo, index) {
-      this.tasks.splice(index, 1, editedTaskInfo)
+    editSelectedTaskInfo(editedTaskInfo) {
+      this.tasks.splice(this.selectedTaskInfo.id, 1, editedTaskInfo)
       this.showTaskInfoModal = false
     },
     removeSelectedTask(selectedTask) {
