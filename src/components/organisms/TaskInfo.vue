@@ -93,11 +93,7 @@ export default {
   },
   data() {
     return {
-      editedTaskInfo: {
-        name: this.selectedTaskInfo.name,
-        time: this.selectedTaskInfo.time,
-        details: this.selectedTaskInfo.details
-      },
+      editedTaskInfo: {},
       showNoNameErrorMessage: false,
       showTooLongNameErrorMessage: false,
       length: 0
@@ -108,6 +104,11 @@ export default {
       return this.selectedTaskInfo
     }
   },
+  // watch: {
+  //   editedTaskInfo() {
+  //     this.editedTaskInfo = this.selectedTaskInfo
+  //   }
+  // },
   methods: {
     editSelectedTaskName(event) {
       this.editedTaskInfo.name = event.target.value
@@ -119,24 +120,24 @@ export default {
       this.editedTaskInfo.details = event.target.value
     },
     editSelectedTaskInfo() {
-      if (this.editedTaskInfo.name.length == 0){
+      if (this.editedTaskInfo.name && this.editedTaskInfo.name.length == 0){
         this.showNoNameErrorMessage = true
         this.showTooLongNameErrorMessage = false
-      }else if (this.editedTaskInfo.name.length > 24) {
+      }else if (this.editedTaskInfo.name && this.editedTaskInfo.name.length > 24) {
         this.showTooLongNameErrorMessage = true
         this.showNoNameErrorMessage = false
       }else{
-        this.selectedTaskInfo.name = this.editedTaskInfo.name
-        this.selectedTaskInfo.time = this.editedTaskInfo.time
-        this.selectedTaskInfo.details = this.editedTaskInfo.details
+        this.editedTaskInfo.id = this.selectedTaskInfo.id
+        this.editedTaskInfo.complete = this.selectedTaskInfo.complete
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
-        this.$emit("editSelectedTaskInfo", this.selectedTaskInfo);
+        this.$emit("editSelectedTaskInfo", this.editedTaskInfo);
+        // this.editedTaskInfo = {}
       }
     },
     removeSelectedTask() {
       if(confirm('削除しますか？')){
-        this.$emit("removeSelectedTask");
+        this.$emit("removeSelectedTask", this.selectedTaskInfo.id);
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
       }

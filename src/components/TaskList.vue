@@ -70,6 +70,21 @@ export default {
     reflectTask(value) {
       this.tasks = value;
     },
+    editSelectedTaskInfo(editedTaskInfo, index) {
+      this.tasks.splice(index, 1, editedTaskInfo)
+      this.showTaskInfoModal = false
+    },
+    removeSelectedTask(index) {
+      this.tasks.splice(index, 1)
+      this.showTaskInfoModal = false
+    },
+    openTaskInfoModal(value) {
+      this.selectedTaskInfo = value
+      this.showTaskInfoModal = true
+    },
+    closeTaskInfoModalWithNoEdit() {
+      this.showTaskInfoModal = false
+    },
     widthClass(value) {
       if (value < 30) {
         return {
@@ -89,21 +104,6 @@ export default {
         };
       }
     },
-    editSelectedTaskInfo(editedTaskInfo) {
-      this.tasks.splice(this.selectedTaskInfo.id, 1, editedTaskInfo)
-      this.showTaskInfoModal = false
-    },
-    removeSelectedTask(selectedTask) {
-      this.tasks.splice(selectedTask, 1)
-      this.showTaskInfoModal = false
-    },
-    openTaskInfoModal(value) {
-      this.selectedTaskInfo = value
-      this.showTaskInfoModal = true
-    },
-    closeTaskInfoModalWithNoEdit() {
-      this.showTaskInfoModal = false
-    }
   },
 };
 </script>
