@@ -14,7 +14,7 @@
       class="box"
     >
       <li
-        v-for="task in tasks"
+        v-for="(task, index) in tasks"
         :key="task.id"
         class="task-width"
         :style="widthClass(task.time)"
@@ -32,7 +32,7 @@
           </button>
           <button
             class="btn icon-btn"
-            @click="openTaskInfoModal(task)"
+            @click="openTaskInfoModal(task); selectTaskIndex(index)"
           >
             <font-awesome-icon
               class="icon"
@@ -63,23 +63,27 @@ export default {
     return {
       tasks: [],
       selectedTaskInfo: {},
-      showTaskInfoModal: false
+      showTaskInfoModal: false,
+      selectedTaskIndex: ""
     };
   },
   methods: {
     reflectTask(value) {
       this.tasks = value;
     },
-    editSelectedTaskInfo(editedTaskInfo, index) {
-      this.tasks.splice(index, 1, editedTaskInfo)
+    selectTaskIndex(index) {
+      this.selectedTaskIndex = index
+    },
+    editSelectedTaskInfo(editedTaskInfo) {
+      this.tasks.splice(editedTaskInfo.id, 1, editedTaskInfo)
       this.showTaskInfoModal = false
     },
-    removeSelectedTask(index) {
-      this.tasks.splice(index, 1)
+    removeSelectedTask() {
+      this.tasks.splice(this.selectedTaskIndex, 1,)
       this.showTaskInfoModal = false
     },
-    openTaskInfoModal(value) {
-      this.selectedTaskInfo = value
+    openTaskInfoModal(selectedTask) {
+      this.selectedTaskInfo = selectedTask
       this.showTaskInfoModal = true
     },
     closeTaskInfoModalWithNoEdit() {

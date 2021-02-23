@@ -93,7 +93,11 @@ export default {
   },
   data() {
     return {
-      editedTaskInfo: {},
+      editedTaskInfo: {
+        name: "",
+        time: 0,
+        details: ""
+      },
       showNoNameErrorMessage: false,
       showTooLongNameErrorMessage: false,
       length: 0
@@ -120,24 +124,67 @@ export default {
       this.editedTaskInfo.details = event.target.value
     },
     editSelectedTaskInfo() {
+      if(this.editedTaskInfo.name == "" && this.editedTaskInfo.time == 0 && this.editedTaskInfo.details == "") {
+        // this.alertNameLength()
+        alert("変更がありません")
+
+      } else if(this.editedTaskInfo.name == "" && this.editedTaskInfo.time == 0) {
+        this.editedTaskInfo.name = this.selectedTaskInfo.name
+        this.editedTaskInfo.time = this.selectedTaskInfo.time
+        this.submitEditedTaskInfo()
+
+      } else if(this.editedTaskInfo.name == "" && this.editedTaskInfo.details == "") {
+        this.editedTaskInfo.name = this.selectedTaskInfo.name
+        this.editedTaskInfo.details = this.selectedTaskInfo.details
+        this.submitEditedTaskInfo()
+
+      } else if(this.editedTaskInfo.time == 0 && this.editedTaskInfo.details == "") {
+        this.editedTaskInfo.time = this.selectedTaskInfo.time
+        this.editedTaskInfo.details = this.selectedTaskInfo.details
+        this.alertNameLength()
+
+      } else if(this.editedTaskInfo.name == "") {
+        this.editedTaskInfo.name = this.selectedTaskInfo.name
+        this.submitEditedTaskInfo()
+
+      } else if(this.editedTaskInfo.time == "") {
+        this.editedTaskInfo.time = this.selectedTaskInfo.time
+        this.alertNameLength()
+
+      } else if(this.editedTaskInfo.details == "") {
+        this.editedTaskInfo.details = this.selectedTaskInfo.details
+        this.alertNameLength()
+
+      } else {
+        this.alertNameLength()
+      }
+    },
+    alertNameLength() {
       if (this.editedTaskInfo.name && this.editedTaskInfo.name.length == 0){
         this.showNoNameErrorMessage = true
         this.showTooLongNameErrorMessage = false
       }else if (this.editedTaskInfo.name && this.editedTaskInfo.name.length > 24) {
         this.showTooLongNameErrorMessage = true
         this.showNoNameErrorMessage = false
-      }else{
-        this.editedTaskInfo.id = this.selectedTaskInfo.id
-        this.editedTaskInfo.complete = this.selectedTaskInfo.complete
-        this.showNoNameErrorMessage = false
-        this.showTooLongNameErrorMessage = false
-        this.$emit("editSelectedTaskInfo", this.editedTaskInfo);
-        // this.editedTaskInfo = {}
+      } else {
+        this.submitEditedTaskInfo()
+      }
+    },
+    submitEditedTaskInfo() {
+      this.editedTaskInfo.id = this.selectedTaskInfo.id
+      this.editedTaskInfo.complete = this.selectedTaskInfo.complete
+      this.showNoNameErrorMessage = false
+      this.showTooLongNameErrorMessage = false
+      this.$emit("editSelectedTaskInfo", this.editedTaskInfo);
+      this.editedTaskInfo = {
+        name: "",
+        time: 0,
+        details: ""
       }
     },
     removeSelectedTask() {
       if(confirm('削除しますか？')){
-        this.$emit("removeSelectedTask", this.selectedTaskInfo.id);
+        this.$emit("removeSelectedTask");
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
       }
@@ -147,7 +194,7 @@ export default {
       this.showNoNameErrorMessage = false
       this.showTooLongNameErrorMessage = false
     }
-  },
+  }
 };
 </script>
 
