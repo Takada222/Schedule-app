@@ -75,7 +75,7 @@ export default {
       this.selectedTaskIndex = index
     },
     editSelectedTaskInfo(editedTaskInfo) {
-      this.tasks.splice(editedTaskInfo.id, 1, editedTaskInfo)
+      this.tasks.splice(this.selectedTaskIndex, 1, editedTaskInfo)
       this.showTaskInfoModal = false
     },
     removeSelectedTask() {
