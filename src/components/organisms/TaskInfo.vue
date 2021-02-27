@@ -126,17 +126,17 @@ export default {
     editSelectedTaskInfo() {
       if(this.editedTaskInfo.name == "" && this.editedTaskInfo.time == 0 && this.editedTaskInfo.details == "") {
         // this.alertNameLength()
-        alert("変更がありません")
+        alert("変更してください")
 
       } else if(this.editedTaskInfo.name == "" && this.editedTaskInfo.time == 0) {
         this.editedTaskInfo.name = this.selectedTaskInfo.name
         this.editedTaskInfo.time = this.selectedTaskInfo.time
-        this.submitEditedTaskInfo()
+        this.alertNameLength()
 
       } else if(this.editedTaskInfo.name == "" && this.editedTaskInfo.details == "") {
         this.editedTaskInfo.name = this.selectedTaskInfo.name
         this.editedTaskInfo.details = this.selectedTaskInfo.details
-        this.submitEditedTaskInfo()
+        this.alertNameLength()
 
       } else if(this.editedTaskInfo.time == 0 && this.editedTaskInfo.details == "") {
         this.editedTaskInfo.time = this.selectedTaskInfo.time
@@ -145,7 +145,7 @@ export default {
 
       } else if(this.editedTaskInfo.name == "") {
         this.editedTaskInfo.name = this.selectedTaskInfo.name
-        this.submitEditedTaskInfo()
+        this.alertNameLength()
 
       } else if(this.editedTaskInfo.time == "") {
         this.editedTaskInfo.time = this.selectedTaskInfo.time
@@ -160,7 +160,7 @@ export default {
       }
     },
     alertNameLength() {
-      if (this.editedTaskInfo.name && this.editedTaskInfo.name.length == 0){
+      if (this.editedTaskInfo.name == this.selectedTaskInfo.name){
         this.showNoNameErrorMessage = true
         this.showTooLongNameErrorMessage = false
       }else if (this.editedTaskInfo.name && this.editedTaskInfo.name.length > 24) {
@@ -175,7 +175,7 @@ export default {
       this.editedTaskInfo.complete = this.selectedTaskInfo.complete
       this.showNoNameErrorMessage = false
       this.showTooLongNameErrorMessage = false
-      this.$emit("editSelectedTaskInfo", this.editedTaskInfo);
+      this.$emit("editSelectedTaskInfo", this.editedTaskInfo)
       this.editedTaskInfo = {
         name: "",
         time: 0,
@@ -193,6 +193,11 @@ export default {
       this.$emit("closeTaskInfoModalWithNoEdit")
       this.showNoNameErrorMessage = false
       this.showTooLongNameErrorMessage = false
+      this.editedTaskInfo = {
+        name: "",
+        time: 0,
+        details: ""
+      }
     }
   }
 };

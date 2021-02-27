@@ -41,7 +41,7 @@
           </button>
         </div>
         <p class="task-name">
-          {{ task.name }}{{ task.id }}
+          {{ task.name }}{{ task.complete }}
         </p>
       </li>
     </draggable>
@@ -71,6 +71,9 @@ export default {
     reflectTask(value) {
       this.tasks = value;
     },
+    // taskComplete(task) {
+    //   task.complete = !task.complete
+    // },
     selectTaskIndex(index) {
       this.selectedTaskIndex = index
     },
