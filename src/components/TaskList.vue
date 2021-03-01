@@ -23,7 +23,7 @@
         <div class="icon-btns">
           <button
             class="btn icon-btn left-icon-btn"
-            @click="task.complete = !task.complete"
+            @click="taskComplete(task)"
           >
             <font-awesome-icon
               class="icon"
@@ -71,9 +71,9 @@ export default {
     reflectTask(value) {
       this.tasks = value;
     },
-    // taskComplete(task) {
-    //   task.complete = !task.complete
-    // },
+    taskComplete(task) {
+      task.complete = !task.complete
+    },
     selectTaskIndex(index) {
       this.selectedTaskIndex = index
     },

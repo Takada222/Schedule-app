@@ -96,7 +96,9 @@ export default {
       editedTaskInfo: {
         name: "",
         time: 0,
-        details: ""
+        details: "",
+        id: 0,
+        complete: false
       },
       showNoNameErrorMessage: false,
       showTooLongNameErrorMessage: false,
@@ -108,11 +110,6 @@ export default {
       return this.selectedTaskInfo
     }
   },
-  // watch: {
-  //   editedTaskInfo() {
-  //     this.editedTaskInfo = this.selectedTaskInfo
-  //   }
-  // },
   methods: {
     editSelectedTaskName(event) {
       this.editedTaskInfo.name = event.target.value
@@ -179,7 +176,9 @@ export default {
       this.editedTaskInfo = {
         name: "",
         time: 0,
-        details: ""
+        details: "",
+        id: 0,
+        complete: false
       }
     },
     removeSelectedTask() {
@@ -214,6 +213,9 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 #task-info-modal {
@@ -222,6 +224,9 @@ export default {
   width: 350px;
   height: 400px;
   position: relative;
+  &:hover {
+    cursor: default;
+  }
 }
 
 .close-btn {
