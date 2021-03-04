@@ -1,111 +1,104 @@
 <template>
   <div class="body-container">
-    <div
-      class="link link-to-how"
-      :class="{mouseHoverLeft:isActiveLeft}"
-      @mouseover="changeLeftColor"
-      @mouseleave="ripositLeftColor"
-    >
-      <p>? How To Use ?</p>
+    <div class="link link-to-how">
+      <!-- <p>? How To Use ?</p> -->
       <a
         href="#"
         @click="toHowToUse"
-      />
+      >? How To Use ?</a>
     </div>
-    <div
-      class="link link-to-schedule"
-      :class="{mouseHoverRight:isActiveRight}"
-      @mouseover="changeRightColor"
-      @mouseleave="ripositRightColor"
-    >
-      <p>! Try Using !</p>
+    <div class="link link-to-schedule">
       <a
         href="#"
         @click="toSchedule"
-      />
+      >! Try Using !</a>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+  export default {
     data() {
-        return {
-            isActiveLeft: false,
-            isActiveRight: false
-        }
+      return {
+        isActiveLeft: false,
+        isActiveRight: false
+      }
     },
     methods: {
-        toHowToUse() {
-            this.$router.push('/HowToUse');
-        },
-        toSchedule() {
-            this.$router.push('/Schedule');
-        },
-        changeLeftColor() {
-            this.isActiveLeft = true
-        },
-        ripositLeftColor() {
-            this.isActiveLeft = false
-        },
-        changeRightColor() {
-            this.isActiveRight = true
-        },
-        ripositRightColor() {
-            this.isActiveRight = false
-        }
+      toHowToUse() {
+        this.$router.push('/HowToUse');
+      },
+      toSchedule() {
+        this.$router.push('/Schedule');
+      } 
     }
-}
+  }
 </script>
 
-<style scoped>
-    .body-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 70px;
-        z-index: 1;
-    }
+<style lang="scss" scoped>
 
-    .link {
-        width: 50%;
-        line-height: 650px;
-        position: relative;
-    }
-    
-    .link a {
+  .body-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 70px;
+  }
+
+  .link {
+    width: 50%;
+    line-height: 650px;
+    font-size: 80px;
+    a {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      color: rgb(70, 180, 180);
+      transition: .3s;
+      text-decoration: none;
+      &::before{
         position: absolute;
         top: 0;
+        right: 0;
+        bottom: 0;
         left: 0;
-        height: 100%;
-        width: 100%;
+        z-index: -1;
+        content: '';
+        background: rgba(255, 240, 107, 0.9);
+        transform: scale(0, 1);
+        transition: transform .4s;
+      }
+      &:hover {
+        color: rgb(255, 95, 95);
+        &::before {
+          transform: scale(1, 1);
+        }
+      }
     }
+}
 
-    .link p {
-        padding: 0 20px;
-        font-size: 80px;
-        color: rgb(230, 150, 0);
-        transition: 1s;
+.link-to-how {
+  border-right: 1px solid #000;
+  text-align: right;
+  a {
+    &::before{
+      transform-origin: right top;
     }
+    &:hover::before {
+      transform-origin: right top;
+    }
+  }
+}
 
-    .mouseHoverLeft p {
-        color: white;
-        background-color: rgba(196, 150, 52, 0.605);
-        transition: 1s;
+.link-to-schedule {
+  border-left: 1px solid #000;
+  text-align: left;
+  a {
+    &::before{
+      transform-origin: left top;
     }
-
-    .mouseHoverRight p {
-        color: white;
-        background-color: rgba(196, 150, 52, 0.755);
-        transition: 1s;
+    &:hover::before {
+      transform-origin: left top;
     }
-
-    .link-to-how {
-        border-right: 1px solid #000;
-        text-align: right;
-    }
-
-    .link-to-schedule {
-        border-left: 1px solid #000;
-    }
+  }
+}
 </style>
