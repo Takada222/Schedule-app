@@ -128,12 +128,12 @@ export default {
       } else if(this.editedTaskInfo.name == "" && this.editedTaskInfo.time == 0) {
         this.editedTaskInfo.name = this.selectedTaskInfo.name
         this.editedTaskInfo.time = this.selectedTaskInfo.time
-        this.alertNameLength()
+        this.submitEditedTaskInfo()
 
       } else if(this.editedTaskInfo.name == "" && this.editedTaskInfo.details == "") {
         this.editedTaskInfo.name = this.selectedTaskInfo.name
         this.editedTaskInfo.details = this.selectedTaskInfo.details
-        this.alertNameLength()
+        this.submitEditedTaskInfo()
 
       } else if(this.editedTaskInfo.time == 0 && this.editedTaskInfo.details == "") {
         this.editedTaskInfo.time = this.selectedTaskInfo.time
@@ -142,7 +142,7 @@ export default {
 
       } else if(this.editedTaskInfo.name == "") {
         this.editedTaskInfo.name = this.selectedTaskInfo.name
-        this.alertNameLength()
+        this.submitEditedTaskInfo()
 
       } else if(this.editedTaskInfo.time == "") {
         this.editedTaskInfo.time = this.selectedTaskInfo.time
