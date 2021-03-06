@@ -183,7 +183,7 @@ export default {
     },
     removeSelectedTask() {
       if(confirm('削除しますか？')){
-        this.$emit("removeSelectedTask");
+        this.$emit("removeSelectedTask", this.selectedTaskInfo);
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
       }

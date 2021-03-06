@@ -41,7 +41,7 @@
           </button>
         </div>
         <p class="task-name">
-          {{ task.name }}{{ task.complete }}
+          {{ task.name }}
         </p>
       </li>
     </draggable>
@@ -89,7 +89,8 @@ export default {
       this.selectedTaskInfo = selectedTask
       this.showTaskInfoModal = true
     },
-    closeTaskInfoModalWithNoEdit() {
+    closeTaskInfoModalWithNoEdit(uneditedTaskInfo) {
+      this.selectedTaskInfo = uneditedTaskInfo
       this.showTaskInfoModal = false
     },
     widthClass(value) {

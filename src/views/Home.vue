@@ -90,7 +90,7 @@
 }
 
 .link-to-schedule {
-  border-left: 1px solid #000;
+  border-left: 2px solid #000;
   text-align: left;
   a {
     &::before{
