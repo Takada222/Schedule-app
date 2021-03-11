@@ -66,16 +66,16 @@
         </div>
         <div class="btn-group">
           <button
-            class="edit-btn"
-            @click="editSelectedTaskInfo()"
-          >
-            変更
-          </button>
-          <button
             class="delete-btn"
             @click="removeSelectedTask()"
           >
             削除
+          </button>
+          <button
+            class="edit-btn"
+            @click="editSelectedTaskInfo()"
+          >
+            変更
           </button>
         </div>
       </div>
@@ -183,19 +183,21 @@ export default {
     },
     removeSelectedTask() {
       if(confirm('削除しますか？')){
-        this.$emit("removeSelectedTask", this.selectedTaskInfo);
+        this.$emit("removeSelectedTask");
         this.showNoNameErrorMessage = false
         this.showTooLongNameErrorMessage = false
       }
     },
     closeTaskInfoModalWithNoEdit() {
-      this.$emit("closeTaskInfoModalWithNoEdit")
+      this.$emit("closeTaskInfoModalWithNoEdit", this.selectedTaskInfo)
       this.showNoNameErrorMessage = false
       this.showTooLongNameErrorMessage = false
       this.editedTaskInfo = {
         name: "",
         time: 0,
-        details: ""
+        details: "",
+        id: 0,
+        complete: false
       }
     }
   }

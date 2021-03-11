@@ -79,11 +79,11 @@
             />
           </div>
           <div class="btn-group">
-            <button @click="createNewTaskOrShowErrorMessage()">
-              作成
-            </button>
             <button @click="removeInput(); closeCreateTaskModal()">
               削除
+            </button>
+            <button @click="createNewTaskOrShowErrorMessage()">
+              作成
             </button>
           </div>
         </div>
