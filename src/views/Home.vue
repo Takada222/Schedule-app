@@ -68,7 +68,8 @@
         transition: transform .4s;
       }
       &:hover {
-        color: rgb(255, 95, 95);
+        color: #333;
+        transition: 2s;
         &::before {
           transform: scale(1, 1);
         }

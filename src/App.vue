@@ -43,6 +43,8 @@ export default {
 
   h1 {
     color: rgba(200, 70, 70, 0.9);
-    margin-bottom: 20px;
+    font-size: 40px;
+    letter-spacing: 10px;
+    margin: 0 30px 20px;
   }
 </style>
